@@ -1,18 +1,18 @@
-import  {ethers} from 'ethers'
-import MintAbi from './artifacts/MintContract_metadata.json'
-import UnlockAbi from './artifacts/UnlockContract_metadata.json'
+import  {ethers} from 'ethers';
+import MintAbi from '../artifacts/MintContract.json' assert { type: 'json' };
+import UnlockAbi from '../artifacts/UnlockContract.json' assert { type: 'json' };
 
 
 // Connect to Sepolia
-const sepoliaProvider = new ethers.providers.JsonRpcProvider("SEPOLIA_RPC_URL");
+const sepoliaProvider = new ethers.providers.JsonRpcProvider("https://rpc2.sepolia.org");
 const unlockContractAddress = "0xC5d05E860DD9cBdc92d0aD69eb87DA4D407F3A6"; 
-const unlockContractABI = UnlockAbi.abi;
+const unlockContractABI = UnlockAbi.output.abi;
 const unlockContract = new ethers.Contract(unlockContractAddress, unlockContractABI, sepoliaProvider);
 
 // Connect to Arbitrum
-const arbitrumProvider = new ethers.providers.JsonRpcProvider("ARBITRUM_RPC_URL");
+const arbitrumProvider = new ethers.providers.JsonRpcProvider("https://sepolia-rollup.arbitrum.io/rpc");
 const mintContractAddress = "0x6DbAcA96758A85529Ba9416382344fD51f84024F"; // Replace with your deployed mint contract address
-const mintContractABI = MintAbi.abi; // Provide the ABI of MintContract
+const mintContractABI = MintAbi.output.abi; // Provide the ABI of MintContract
 const mintContract = new ethers.Contract(mintContractAddress, mintContractABI, arbitrumProvider);
 
 // Listen for Locked events
@@ -39,3 +39,7 @@ mintContract.on("Burned", async (user, amount) => {
 function calculateUnlockAmount(amount) {
     return amount / 10; 
 }
+
+
+// pm2 link d65b183nim9tw85 da4kipw2lyxbxzo
+// pm2 start app.js
