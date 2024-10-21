@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="h-full mx-auto w-full max-w-screen-xl px-2.5 md:px-20'">
             <div className="flex h-14 items-center justify-between 
             border-zinc-200">
-                <Link to={'/'} className='flex z-40 font-semibold'>
+                <Link to={'/'} className='flex z-40 font-semibold px-1'>
                   TokenSwap<span className='font-bold text-pink-600'>Arbitrum</span>
                 </Link>
 
